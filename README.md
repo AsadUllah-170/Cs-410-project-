@@ -1,72 +1,95 @@
 # Cs-410-project-
-**APP.CONFIG file**
-<?xml version="1.0" encoding="utf-8"?>
-<configuration>
-    <startup> 
-        <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.7.2" />
-    </startup>
-	<appSettings>
-		<add key="key" value="755d56637be37bccfa901f54603d2cae" />
-		<add key="BaseUrl" value="https://api.openweathermap.org/data/2.5/" />
-	</appSettings>
-  <runtime>
-    <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
-      <dependentAssembly>
-        <assemblyIdentity name="System.Memory" publicKeyToken="cc7b13ffcd2ddd51" culture="neutral" />
-        <bindingRedirect oldVersion="0.0.0.0-4.0.2.0" newVersion="4.0.2.0" />
-      </dependentAssembly>
-      <dependentAssembly>
-        <assemblyIdentity name="System.Threading.Tasks.Extensions" publicKeyToken="cc7b13ffcd2ddd51" culture="neutral" />
-        <bindingRedirect oldVersion="0.0.0.0-4.2.4.0" newVersion="4.2.4.0" />
-      </dependentAssembly>
-      <dependentAssembly>
-        <assemblyIdentity name="System.Runtime.CompilerServices.Unsafe" publicKeyToken="b03f5f7f11d50a3a" culture="neutral" />
-        <bindingRedirect oldVersion="0.0.0.0-6.0.3.0" newVersion="6.0.3.0" />
-      </dependentAssembly>
-    </assemblyBinding>
-  </runtime>
-</configuration>
+**🌦️ WeatherApp**
+WeatherApp is a simple Windows Forms application built using C# and .NET Framework 4.7.2. It allows users to fetch and display current weather information (temperature and humidity) for any city using the OpenWeatherMap API.
 
-**Forms.cs file**
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Text.Json;
-using System.Net.Http;
-using System.Text.Json.Nodes;
+📋 Features
+🔍 Search by city name
 
-namespace myweather
-{
-    public partial class Form1 : Form
-    {
-        private string key = System.Configuration.ConfigurationManager.AppSettings["key"].ToString();
-        private string baseUrl = System.Configuration.ConfigurationManager.AppSettings["BaseUrl"].ToString();
-        public Form1()
-        {
-            InitializeComponent();
-        }
+🌡️ Displays real-time temperature and humidity
 
-        private async void btnGET_Click(object sender, EventArgs e)
-        {
-            string city = txtCITY.Text;
-            using (HttpClient client = new HttpClient())
-            {
-                lblDETAILS.Text = "wait......";
-                string url = baseUrl + $"weather?q={city}&appid={key}&units=metric";
-                string response = await client.GetStringAsync(url);
-                var node = JsonNode.Parse(response);
-                lblDETAILS.Text = "temp:" + node["main"]["temp"].ToString() + "C" + Environment.NewLine +
-                    "Humidity:" + node["main"]["humidity"].ToString();
-            }
-        }
-    }
-}
+🌐 Uses OpenWeatherMap API with live data
+
+🖥️ Built with WinForms for a user-friendly UI
+
+🔐 API key securely stored in App.config
+
+🧱 Project Structure
+1. App.config
+Contains configuration for:
+
+Runtime settings
+
+API key and Base URL
+
+Dependency version bindings for compatibility
+
+Key Elements:
+
+xml
+
+
+<add key="key" value="Secret key" />
+<add key="BaseUrl" value="https://api.openweathermap.org/data/2.5/" />
+**2. Form1.cs**
+Main logic for:
+
+UI interaction
+
+HTTP GET requests using HttpClient
+
+JSON parsing using System.Text.Json
+
+Displaying weather data on the form
+
+🛠️ Technologies Used
+Language: C#
+
+Framework: .NET Framework 4.7.2
+
+UI: Windows Forms (WinForms)
+
+API: OpenWeatherMap
+
+JSON Parsing: System.Text.Json
+
+HTTP Requests: System.Net.Http
+
+🧪 How It Works
+User enters a city name.
+
+App sends a GET request to:
+
+
+
+https://api.openweathermap.org/data/2.5/weather?q={city}&appid={key}&units=metric
+Parses JSON to extract:
+
+main.temp → Temperature in Celsius
+
+main.humidity → Humidity percentage
+
+Displays results on the form.
+
+🧩 Dependencies
+These dependencies are handled by the .config binding redirects:
+
+System.Memory
+
+System.Threading.Tasks.Extensions
+
+System.Runtime.CompilerServices.Unsafe
+
+🧑‍💻 Author
+
+GitHub:[Muhammad Asad Ullah ]
+
+📜 License
+This project is licensed under the MIT License.
+
+**images of software**
+![image](https://github.com/user-attachments/assets/d63c5497-7117-4d79-bc7b-802a669b62ff)
+![image](https://github.com/user-attachments/assets/20f7b341-1ca1-4ba2-a557-5b25c45bb87c)
+
 
 
 
